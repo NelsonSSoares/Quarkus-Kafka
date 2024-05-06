@@ -2,6 +2,7 @@ package nelsonssoares.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import nelsonssoares.domain.dto.ProposalDTO;
 import nelsonssoares.domain.dto.ProposalDetailsDTO;
 import nelsonssoares.domain.entity.ProposalEntity;
@@ -41,7 +42,7 @@ public class ProposalServiceImpl implements ProposalService {
     public void removeProposal(long id) {
 
     }
-
+    @Transactional
     private ProposalDTO buildAndSaveNewProposal(ProposalDetailsDTO proposalDetailsDTO) {
         ProposalEntity proposalEntity = objectMapper.convertValue(proposalDetailsDTO, ProposalEntity.class);
         proposalEntity.setCreated(new Date());
