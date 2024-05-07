@@ -1,6 +1,7 @@
 package nelsonssoares.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import nelsonssoares.domain.dto.ProposalDTO;
@@ -12,6 +13,7 @@ import nelsonssoares.service.ProposalService;
 
 import java.util.Date;
 
+@ApplicationScoped
 public class ProposalServiceImpl implements ProposalService {
 
     @Inject
@@ -39,10 +41,12 @@ public class ProposalServiceImpl implements ProposalService {
 
 
     @Override
-    public void removeProposal(long id) {
-
-    }
     @Transactional
+    public void removeProposal(long id) {
+        proposalRepository.deleteById(id);
+    }
+
+
     private ProposalDTO buildAndSaveNewProposal(ProposalDetailsDTO proposalDetailsDTO) {
         ProposalEntity proposalEntity = objectMapper.convertValue(proposalDetailsDTO, ProposalEntity.class);
         proposalEntity.setCreated(new Date());
