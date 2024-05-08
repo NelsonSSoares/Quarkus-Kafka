@@ -20,14 +20,14 @@ public class ProposalController {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"user","manager"})
+    //@RolesAllowed({"user","manager"})
     public ProposalDetailsDTO findDetailsProposal(@PathParam("id") Long id){
         logger.info("Getting proposal by id: {}", id);
         return proposalService.findFullProposal(id);
     }
 
     @POST
-    @RolesAllowed("proposal-costumer")
+    //@RolesAllowed("proposal-costumer")
     @Transactional
     public Response createProposal(ProposalDetailsDTO proposalDetailsDTO) {
         logger.info("Creating new proposal: {}", proposalDetailsDTO);
@@ -42,7 +42,7 @@ public class ProposalController {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("manager")
+    //@RolesAllowed("manager")
     @Transactional
     public Response removeProposal(@PathParam("id") Long id) {
         logger.info("Removing proposal by id: {}", id);
