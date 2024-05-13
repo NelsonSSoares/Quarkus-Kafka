@@ -19,7 +19,7 @@ public class CSVHelper {
              CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format)) {
             for (OpportunityDTO apps : opportunities) {
                 List<String> data = Arrays.asList(
-                        apps.getProposalId(),
+                        String.valueOf(apps.getProposalId()),
                         apps.getCustomer(),
                         String.valueOf(apps.getPriceTonne()),
                         String.valueOf(apps.getLastDollarQuotation())
