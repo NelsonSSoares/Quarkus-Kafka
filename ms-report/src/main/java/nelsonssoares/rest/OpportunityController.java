@@ -25,6 +25,7 @@ public class OpportunityController {
                     .build();
         }catch (Exception e){
             return Response.serverError().build();
+
         }
     }
 
