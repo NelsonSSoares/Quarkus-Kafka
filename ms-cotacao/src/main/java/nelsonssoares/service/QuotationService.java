@@ -34,7 +34,7 @@ public class QuotationService {
     public void getCurrencyPrice(){
         CurrencyPriceDTO currencyPriceInfo = currencyPriceClient.getPriceByPair("USD-BRL");
 
-        log.info("Currency Price Info: {}", currencyPriceInfo);
+        log.info("Currency Price Info: {}", currencyPriceInfo.getUSDBRL());
 
         if(updateInfoPrice(currencyPriceInfo)){
             kafkaEvents.sendNewKafkaEvent(QuotationDTO
@@ -47,7 +47,10 @@ public class QuotationService {
     }
 
     private boolean updateInfoPrice(CurrencyPriceDTO currencyInfo) {
+        //Request test
 
+
+        //Codigo
         BigDecimal currentPrice = new BigDecimal(currencyInfo.getUSDBRL().getBid());
         boolean updated = false;
         //AtomicBoolean updated = new AtomicBoolean(false);
