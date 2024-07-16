@@ -9,6 +9,8 @@ import nelsonssoares.domain.entities.QuotationEntity;
 import nelsonssoares.domain.repository.QuotationRepository;
 import nelsonssoares.message.KafkaEvents;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @ApplicationScoped
 public class QuotationService {
 
+    private static final Logger log = LoggerFactory.getLogger(QuotationService.class);
     @Inject
     @RestClient
     CurrencyPriceClient currencyPriceClient;
@@ -30,6 +33,8 @@ public class QuotationService {
 
     public void getCurrencyPrice(){
         CurrencyPriceDTO currencyPriceInfo = currencyPriceClient.getPriceByPair("USD-BRL");
+
+        log.info("Currency Price Info: {}", currencyPriceInfo);
 
         if(updateInfoPrice(currencyPriceInfo)){
             kafkaEvents.sendNewKafkaEvent(QuotationDTO

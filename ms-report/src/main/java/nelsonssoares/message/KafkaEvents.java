@@ -18,6 +18,7 @@ public class KafkaEvents {
     @Inject
     OpportunityService opportunityService;
 
+
     @Incoming("proposal")
     @Transactional
     public void consumeProposal(ProposalDTO proposal) {

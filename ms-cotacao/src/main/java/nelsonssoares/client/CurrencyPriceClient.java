@@ -7,8 +7,8 @@ import jakarta.ws.rs.PathParam;
 import nelsonssoares.domain.dto.CurrencyPriceDTO;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Path("/last")
-@RegisterRestClient(configKey = "economy-api")
+//@Path("/json/last/")
+@RegisterRestClient(baseUri = "https://economia.awesomeapi.com.br/json/last")
 @ApplicationScoped
 public interface CurrencyPriceClient {
     @GET
