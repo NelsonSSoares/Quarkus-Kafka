@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class ProposalDetailsDTO {
-    private Long id;
+    private Long proposalId;
     private String customer;
     private BigDecimal priceTonne;
     private Integer tonnes;

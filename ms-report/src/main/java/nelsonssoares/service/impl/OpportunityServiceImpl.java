@@ -2,6 +2,7 @@ package nelsonssoares.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import nelsonssoares.domain.dto.OpportunityDTO;
 import nelsonssoares.domain.dto.ProposalDTO;
 import nelsonssoares.domain.dto.QuotationDTO;
@@ -42,10 +43,15 @@ public class OpportunityServiceImpl implements OpportunityService {
         opportunityRepository.persist(opportunityEntity);
 
     }
-
+    @Transactional
     @Override
     public void saveQuotation(QuotationDTO quotationDTO) {
 
+        QuotationEntity createQuotation = new QuotationEntity();
+        createQuotation.setDate(new Date());
+        createQuotation.setCurrencyPrice(quotationDTO.getCurrencyPrice());
+
+        quotationRepository.persist(createQuotation);
     }
 
     @Override

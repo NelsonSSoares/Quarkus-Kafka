@@ -14,7 +14,7 @@ import nelsonssoares.service.ProposalService;
 import java.util.Date;
 
 @ApplicationScoped
-public class ProposalServiceImpl implements ProposalService {
+public class  ProposalServiceImpl implements ProposalService {
 
     @Inject
     ProposalRepository proposalRepository;
