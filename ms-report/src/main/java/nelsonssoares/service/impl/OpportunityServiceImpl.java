@@ -11,9 +11,7 @@ import nelsonssoares.domain.entities.QuotationEntity;
 import nelsonssoares.domain.repository.OpportunityRepository;
 import nelsonssoares.domain.repository.QuotationRepository;
 import nelsonssoares.service.OpportunityService;
-import nelsonssoares.utils.CSVHelper;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -56,23 +54,20 @@ public class OpportunityServiceImpl implements OpportunityService {
 
     @Override
     public List<OpportunityDTO> generateOpportunityData() {
-        return List.of();
-    }
 
-    @Override
-    public ByteArrayInputStream generateCSVOpportunityReport() {
+        List<OpportunityDTO> opportunities = new ArrayList<>();
 
-        List<OpportunityDTO> opportunityList = new ArrayList<>();
-        opportunityRepository.findAll().list().forEach(item ->{
-            opportunityList.add(OpportunityDTO.builder()
-                        .proposalId(item.getProposalId())
-                        .priceTonne(item.getPriceTonne())
-                        .customer(item.getCustomer())
-                        .lastDollarQuotation(item.getLastDollarQuotation())
+        opportunityRepository.findAll().list().forEach(opportunityEntity -> {
+            opportunities.add(OpportunityDTO.builder()
+                    .customer(opportunityEntity.getCustomer())
+                    .lastDollarQuotation(opportunityEntity.getLastDollarQuotation())
+                    .priceTonne(opportunityEntity.getPriceTonne())
                     .build());
         });
 
 
-        return CSVHelper.opportunitiesToCSV(opportunityList);
+        return opportunities;
     }
+
+
 }

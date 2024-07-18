@@ -1,33 +1,42 @@
 package nelsonssoares.controller;
 
+import io.quarkus.security.Authenticated;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import nelsonssoares.domain.dto.ProposalDetailsDTO;
 import nelsonssoares.service.ProposalService;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 @Path("/api/proposal")
+@Authenticated
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ProposalController {
     private final Logger logger = LoggerFactory.getLogger(ProposalController.class);
 
     @Inject
     ProposalService proposalService;
 
+    @Inject
+    JsonWebToken jwt;
+
     @GET
     @Path("/{id}")
-    //@RolesAllowed({"user","manager"})
+    @RolesAllowed({"user","manager"})
     public ProposalDetailsDTO findDetailsProposal(@PathParam("id") Long id){
         logger.info("Getting proposal by id: {}", id);
         return proposalService.findFullProposal(id);
     }
 
     @POST
-    //@RolesAllowed("proposal-costumer")
+    @RolesAllowed("proposal-customer")
     @Transactional
     public Response createProposal(ProposalDetailsDTO proposalDetailsDTO) {
         logger.info("Creating new proposal: {}", proposalDetailsDTO);
@@ -42,7 +51,7 @@ public class ProposalController {
 
     @DELETE
     @Path("/{id}")
-    //@RolesAllowed("manager")
+    @RolesAllowed("manager")
     @Transactional
     public Response removeProposal(@PathParam("id") Long id) {
         logger.info("Removing proposal by id: {}", id);
