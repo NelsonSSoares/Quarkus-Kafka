@@ -17,16 +17,17 @@ public class ProposalServiceImpl implements ProposalService {
 
     @Override
     public ProposalDetailsDTO findFullProposal(long id) {
-        return null;
+
+        return proposalRestClient.getProposalDetailsById(id);
     }
 
     @Override
     public Response createNewProposal(ProposalDetailsDTO proposalDetailsDTO) {
-        return null;
+        return proposalRestClient.createProposal(proposalDetailsDTO);
     }
 
     @Override
     public Response removeProposal(long id) {
-        return null;
+        return proposalRestClient.removeProposal(id);
     }
 }

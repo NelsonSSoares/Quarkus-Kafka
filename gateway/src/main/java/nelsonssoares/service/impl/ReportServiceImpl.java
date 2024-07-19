@@ -1,21 +1,32 @@
 package nelsonssoares.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import nelsonssoares.domain.dto.OpportunityDTO;
+import nelsonssoares.outlayers.client.ReportRestClient;
 import nelsonssoares.service.ReportService;
+import nelsonssoares.utils.CSVHelper;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @ApplicationScoped
 public class ReportServiceImpl implements ReportService {
+
+    @Inject
+    @RestClient
+    ReportRestClient reportRestClient;
+
     @Override
-    public ByteArrayOutputStream generayeCSVOppotunityReport() {
-        return null;
+    public ByteArrayInputStream generayeCSVOppotunityReport() {
+
+        List<OpportunityDTO> opportunityData = reportRestClient.requestOpportunitiesData();
+        return CSVHelper.OpportunitiesToCSV(opportunityData);
     }
 
     @Override
     public List<OpportunityDTO> getOpportunityData() {
-        return List.of();
+        return reportRestClient.requestOpportunitiesData();
     }
 }

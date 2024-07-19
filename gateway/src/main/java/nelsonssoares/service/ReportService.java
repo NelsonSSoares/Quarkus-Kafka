@@ -2,11 +2,11 @@ package nelsonssoares.service;
 
 import nelsonssoares.domain.dto.OpportunityDTO;
 
-import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 public interface ReportService {
-    ByteArrayOutputStream generayeCSVOppotunityReport();
+    ByteArrayInputStream generayeCSVOppotunityReport();
 
     List<OpportunityDTO> getOpportunityData();
 }
