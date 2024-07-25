@@ -57,13 +57,18 @@ public class OpportunityServiceImpl implements OpportunityService {
 
         List<OpportunityDTO> opportunities = new ArrayList<>();
 
-        opportunityRepository.findAll().list().forEach(opportunityEntity -> {
-            opportunities.add(OpportunityDTO.builder()
-                    .customer(opportunityEntity.getCustomer())
-                    .lastDollarQuotation(opportunityEntity.getLastDollarQuotation())
-                    .priceTonne(opportunityEntity.getPriceTonne())
-                    .build());
-        });
+        opportunityRepository
+                .findAll()
+                .stream()
+                .forEach(item->{
+                    opportunities.add(OpportunityDTO.builder()
+                            .proposalId(item.getProposalId())
+                            .customer(item.getCustomer())
+                            .priceTonne(item.getPriceTonne())
+                            .lastDollarQuotation(item.getLastDollarQuotation())
+                            .build());
+
+                });
 
 
         return opportunities;
