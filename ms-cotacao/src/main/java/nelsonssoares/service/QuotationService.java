@@ -47,8 +47,6 @@ public class QuotationService {
     }
 
     private boolean updateInfoPrice(CurrencyPriceDTO currencyInfo) {
-        //Request test
-
 
         //Codigo
         BigDecimal currentPrice = new BigDecimal(currencyInfo.getUSDBRL().getBid());
@@ -82,4 +80,5 @@ public class QuotationService {
 
         quotationRepository.persist(quotation);
     }
+
 }

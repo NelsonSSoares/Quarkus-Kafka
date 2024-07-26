@@ -6,12 +6,14 @@ import nelsonssoares.domain.dto.OpportunityDTO;
 import nelsonssoares.outlayers.client.ReportRestClient;
 import nelsonssoares.service.ReportService;
 import nelsonssoares.utils.CSVHelper;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @ApplicationScoped
+@Traced
 public class ReportServiceImpl implements ReportService {
 
     @Inject

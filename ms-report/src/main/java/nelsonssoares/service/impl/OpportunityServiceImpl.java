@@ -11,6 +11,7 @@ import nelsonssoares.domain.entities.QuotationEntity;
 import nelsonssoares.domain.repository.OpportunityRepository;
 import nelsonssoares.domain.repository.QuotationRepository;
 import nelsonssoares.service.OpportunityService;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @ApplicationScoped
+@Traced
 public class OpportunityServiceImpl implements OpportunityService {
 
     @Inject

@@ -10,10 +10,12 @@ import nelsonssoares.domain.entity.ProposalEntity;
 import nelsonssoares.domain.repository.ProposalRepository;
 import nelsonssoares.message.KafkaEvent;
 import nelsonssoares.service.ProposalService;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import java.util.Date;
 
 @ApplicationScoped
+@Traced //rastreamento/monitoramento
 public class  ProposalServiceImpl implements ProposalService {
 
     @Inject

@@ -6,9 +6,11 @@ import jakarta.ws.rs.core.Response;
 import nelsonssoares.domain.dto.ProposalDetailsDTO;
 import nelsonssoares.outlayers.client.ProposalRestClient;
 import nelsonssoares.service.ProposalService;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
+@Traced
 public class ProposalServiceImpl implements ProposalService {
 
     @Inject
